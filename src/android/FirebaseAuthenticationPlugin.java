@@ -163,12 +163,18 @@ public class FirebaseAuthenticationPlugin extends ReflectiveCordovaPlugin implem
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential credential) {
                     signInWithPhoneCredential(credential);
-                    callbackContext.success(null, credential);
+                    JSONObject result = new JSONObject();
+                    result.put("verificationId", null);
+                    result.put("credential", credential);
+                    callbackContext.success(result);
                 }
 
                 @Override
                 public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                    callbackContext.success(verificationId);
+                    JSONObject result = new JSONObject();
+                    result.put("verificationId", verificationId);
+                    result.put("credential", null);
+                    callbackContext.success(result);
                 }
 
                 @Override
