@@ -163,6 +163,7 @@ public class FirebaseAuthenticationPlugin extends ReflectiveCordovaPlugin implem
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential credential) {
                     signInWithPhoneCredential(credential);
+                    callbackContext.success(null, credential);
                 }
 
                 @Override
