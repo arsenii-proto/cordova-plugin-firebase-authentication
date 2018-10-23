@@ -163,18 +163,27 @@ public class FirebaseAuthenticationPlugin extends ReflectiveCordovaPlugin implem
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential credential) {
                     signInWithPhoneCredential(credential);
-                    JSONObject result = new JSONObject();
-                    result.put("verificationId", null);
-                    result.put("credential", credential);
-                    callbackContext.success(result);
+                    
+                    try{
+                        JSONObject result = new JSONObject();
+                        result.put("verificationId", null);
+                        result.put("credential", credential);
+                        callbackContext.success(result);
+                    } catch (JSONException e) {
+                        Log.e(TAG, "Fail to process getProfileData", e);
+                    }
                 }
 
                 @Override
                 public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                    JSONObject result = new JSONObject();
-                    result.put("verificationId", verificationId);
-                    result.put("credential", null);
-                    callbackContext.success(result);
+                    try{    
+                        JSONObject result = new JSONObject();
+                        result.put("verificationId", verificationId);
+                        result.put("credential", null);
+                        callbackContext.success(result);
+                    } catch (JSONException e) {
+                        Log.e(TAG, "Fail to process getProfileData", e);
+                    }
                 }
 
                 @Override
